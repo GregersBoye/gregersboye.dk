@@ -1,0 +1,29 @@
+<?php
+function gregersboye_preprocess_node__article(&$variable)
+{
+  $node = $variable['elements']['#node'];
+  $faqList = $node->get('field_faq_list')->referencedEntities();
+  $variable['teaser'] = $node->get('field_teaser')->value;
+  foreach ($faqList as $question) {
+    $variable['questions'][] = ['question' => $question->get('title')->value, 'answer' => $question->get('field_svar')->value];
+  }
+
+
+}
+
+function gregersboye_preprocess_page(&$variable){
+  $menu_tree = \Drupal::menuTree()->load('main', new \Drupal\Core\Menu\MenuTreeParameters());
+
+  $links = [];
+  foreach ($menu_tree AS $item){
+    if($item->link->isEnabled()){
+    $link = [];
+    $link['target'] = $item->link->getUrlObject()->isExternal() ? '_blank' : '_self';
+    $link['url'] = $item->link->getUrlObject()->toString();
+    $link['title'] = $item->link->getTitle();
+
+    array_push($links, $link);
+    }
+  }
+  $variable['menu'] = $links;
+}

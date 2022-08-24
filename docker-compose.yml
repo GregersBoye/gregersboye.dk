@@ -1,0 +1,57 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: "3.1"
+services:
+
+    mysql:
+        image: mysql:latest
+        container_name: drupal-mysql
+        working_dir: /application
+        volumes:
+            - .:/application
+        environment:
+            - MYSQL_ROOT_PASSWORD=secret
+            - MYSQL_DATABASE=default
+            - MYSQL_USER=default
+            - MYSQL_PASSWORD=secret
+        ports:
+            - "3306:3306"
+
+    #    backend:
+    #      build:
+    #        context: .
+    #        dockerfile: phpdocker/backend/Dockerfile
+    #      container_name: oenskesedlen-backend
+    #      working_dir: /application
+    #      volumes:
+    #          - .:/application
+    #      ports:
+    #          - "80:80"
+    #          - "443:443"
+
+#    webserver:
+#        image: nginx:alpine
+#        container_name: drupal-webserver
+#        working_dir: /application
+#        volumes:
+#            - .:/application
+#            - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+#        ports:
+#            - "80:80"
+#
+#    php-fpm:
+#        build:
+#            context: .
+#            dockerfile: phpdocker/php-fpm/Dockerfile
+#        container_name: docker-php-fpm
+#        working_dir: /application
+#        volumes:
+#            - .:/application
+#            - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+    drupal:
+        image: drupal:latest
+        ports:
+            - "80:80"
+        volumes:
+            -

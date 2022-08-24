@@ -1,0 +1,15 @@
+<h1>Artikel: {{ node.label }}</h1>
+<strong>{{teaser|raw }}</strong>
+<p>
+  {{ content.body }}
+</p>
+<div>
+  <h2>FAQ:</h2>
+  {% for question in questions %}
+  <p>
+    <strong>{{ question.question }}</strong>
+    <br/>
+    {{ question.answer|raw }}
+  </p>
+  {% endfor %}
+</div>

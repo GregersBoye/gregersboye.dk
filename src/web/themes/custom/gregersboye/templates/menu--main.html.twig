@@ -1,0 +1,6 @@
+<h2>Menu</h2>
+{% for menu_item in items %}
+  <li class="{{ item_class }} navigation__item">
+    <a href="{{ menu_item.url }}" class="{{ link_class }}">{{ menu_item.title }}</a>
+  </li>
+{% endfor %}
